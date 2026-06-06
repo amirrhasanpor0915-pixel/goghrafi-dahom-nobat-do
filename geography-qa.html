@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جغرافیا دهم | سوال و جواب</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #18181f;
+    --bg4: #1e1e28;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --text: #e8e8f0;
+    --text2: #9090a8;
+    --text3: #5a5a72;
+    --accent: #7c6fff;
+    --accent2: #5546e8;
+    --accent-glow: rgba(124,111,255,0.15);
+    --green: #3ddb8a;
+    --green-bg: rgba(61,219,138,0.08);
+    --amber: #f5a623;
+    --amber-bg: rgba(245,166,35,0.08);
+    --red: #ff5f72;
+    --red-bg: rgba(255,95,114,0.08);
+  }
+
+  body {
+    font-family: 'Vazirmatn', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    direction: rtl;
+  }
+
+  .noise {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 150px;
+  }
+
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+  }
+
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    gap: 1rem;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 34px;
+    height: 34px;
+    background: var(--accent);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .logo-text {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .logo-sub {
+    font-size: 11px;
+    color: var(--text3);
+    font-weight: 400;
+  }
+
+  .search-wrap {
+    flex: 1;
+    max-width: 320px;
+    position: relative;
+  }
+
+  .search-wrap input {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 8px 16px 8px 36px;
+    color: var(--text);
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .search-wrap input:focus { border-color: var(--accent); }
+  .search-wrap input::placeholder { color: var(--text3); }
+
+  .search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text3);
+    font-size: 14px;
+  }
+
+  .stats-bar {
+    background: var(--accent-glow);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 2rem;
+  }
+
+  .stats-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .stat {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text2);
+  }
+
+  .stat-num {
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .progress-bar {
+    flex: 1;
+    height: 4px;
+    background: var(--bg3);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--green));
+    border-radius: 2px;
+    transition: width 0.5s ease;
+  }
+
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-badge {
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  .section-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .section-count {
+    font-size: 12px;
+    color: var(--text3);
+    margin-right: auto;
+  }
+
+  .qa-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 2.5rem; }
+
+  .qa-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.15s;
+    cursor: pointer;
+  }
+
+  .qa-card:hover { border-color: var(--border2); transform: translateY(-1px); }
+  .qa-card.open { border-color: var(--accent); }
+
+  .qa-q {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+  }
+
+  .q-num {
+    min-width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    background: var(--bg4);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text3);
+    margin-top: 1px;
+    transition: background 0.2s, color 0.2s;
+    flex-shrink: 0;
+  }
+
+  .qa-card.open .q-num {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+
+  .q-text {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text);
+    flex: 1;
+  }
+
+  .q-arrow {
+    color: var(--text3);
+    font-size: 16px;
+    margin-top: 4px;
+    transition: transform 0.3s, color 0.2s;
+    flex-shrink: 0;
+  }
+
+  .qa-card.open .q-arrow { transform: rotate(90deg); color: var(--accent); }
+
+  .qa-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .qa-card.open .qa-a { max-height: 600px; }
+
+  .qa-a-inner {
+    margin: 0 16px 14px;
+    padding: 12px 14px;
+    background: var(--bg3);
+    border-radius: 10px;
+    border-right: 3px solid var(--accent);
+    font-size: 13.5px;
+    line-height: 1.9;
+    color: var(--text2);
+  }
+
+  .qa-a-inner strong { color: var(--green); font-weight: 600; }
+  .qa-a-inner .tag {
+    display: inline-block;
+    background: var(--accent-glow);
+    color: var(--accent);
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 5px;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+
+  .mc-options { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+  .mc-opt {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text2);
+  }
+  .mc-opt.correct {
+    background: var(--green-bg);
+    border-color: var(--green);
+    color: var(--green);
+  }
+  .mc-opt.wrong {
+    background: var(--red-bg);
+    border-color: rgba(255,95,114,0.2);
+    color: var(--text3);
+    text-decoration: line-through;
+  }
+  .opt-label {
+    min-width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    background: var(--bg4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .mc-opt.correct .opt-label {
+    background: var(--green);
+    color: #0a0a0f;
+  }
+
+  .chip-answer {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--green-bg);
+    border: 1px solid var(--green);
+    border-radius: 8px;
+    padding: 5px 12px;
+    color: var(--green);
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 8px;
+  }
+
+  .fill-answer {
+    background: var(--bg4);
+    border: 1px dashed var(--accent);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: var(--accent);
+    font-size: 13px;
+    margin-top: 8px;
+  }
+
+  .list-answer { margin-top: 8px; }
+  .list-answer li {
+    padding: 4px 0;
+    font-size: 13px;
+    color: var(--text2);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .list-answer li::before {
+    content: "◈";
+    color: var(--accent);
+    font-size: 10px;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  .tf-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+  .tf-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    border: 1px solid;
+  }
+  .tf-item.t { background: var(--green-bg); border-color: var(--green); color: var(--green); }
+  .tf-item.f { background: var(--red-bg); border-color: rgba(255,95,114,0.3); color: var(--red); }
+
+  .separator { height: 1px; background: var(--border); margin: 2.5rem 0; }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text3);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .qa-card { animation: fadeUp 0.4s ease both; }
+  .qa-card:nth-child(1){animation-delay:0.05s}
+  .qa-card:nth-child(2){animation-delay:0.1s}
+  .qa-card:nth-child(3){animation-delay:0.15s}
+  .qa-card:nth-child(4){animation-delay:0.2s}
+  .qa-card:nth-child(5){animation-delay:0.25s}
+  .qa-card:nth-child(6){animation-delay:0.3s}
+  .qa-card:nth-child(7){animation-delay:0.35s}
+  .qa-card:nth-child(8){animation-delay:0.4s}
+
+  .hidden { display: none !important; }
+
+  @media(max-width:600px){
+    main { padding: 1rem; }
+    .header-inner { padding: 0; }
+    .stats-inner { gap: 1rem; flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+<div class="noise"></div>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon">🌍</div>
+      <div>
+        <div class="logo-text">جغرافیا دهم</div>
+        <div class="logo-sub">فنی و حرفه‌ای · شبکه و نرم‌افزار</div>
+      </div>
+    </div>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" placeholder="جستجو در سوالات..." id="searchInput" oninput="filterQA()">
+    </div>
+  </div>
+</header>
+
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat"><span class="stat-num" id="total">۲۴</span> سوال</div>
+    <div class="stat"><span class="stat-num" id="opened">۰</span> بازشده</div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress" style="width:0%"></div>
+    </div>
+    <div class="stat" id="pct-text">۰٪</div>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- SECTION 1: چهارگزینه‌ای -->
+  <div class="section-header">
+    <span class="section-badge">بخش ۱</span>
+    <span class="section-title">سوالات چهارگزینه‌ای</span>
+    <span class="section-count">۴ سوال</span>
+  </div>
+  <div class="qa-list">
+
+    <div class="qa-card" onclick="toggle(this)">
+      <div class="qa-q">
+        <div class="q-num">۱</div>
+        <div class="q-text">در مناطق مرتفع کوهستانی مکان‌هایی وجود دارد که سرچشمه رودهای متعددی هستند. این مکان‌ها چه نام دارند؟</div>
+        <div class="q-arrow">›</div>
+      </div>
+      <div class="qa-a"><div class="qa-a-inner">
+        <div class="mc-options">
+          <div class="mc-opt correct"><span class="opt-label">الف</span> کانون آبگیر</div>
+          <div class="mc-opt wrong"><span class="opt-label">ب</span> دریاچه</div>
+          <div class="mc-opt wrong"><span class="opt-label">ج</span> رود</div>
+          <div class="mc-opt wrong"><span class="opt-label">د</span> جلگه</div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="qa-card" onclick="toggle(this)">
+      <div class="qa-q">
+        <div class="q-num">۲</div>
+        <div class="q-text">محدوده‌ای که با توجه به شکل زمین و شیب، آب‌های جاری را به سوی پایین‌ترین نقطه هدایت کند چه نام دارد؟</div>
+        <div class="q-arrow">›</div>
+      </div>
+      <div class="qa-a"><div class="qa-a-inner">
+        <div class="mc-options">
+          <div class="mc-opt wrong"><span class="opt-label">الف</span> جلگه</div>
+          <div class="mc-opt wrong"><span class="opt-label">ب</span> رودخانه</div>
+          <div class="mc-opt wrong"><span class="opt-label">ج</span> دریاچه</div>
+          <div class="mc-opt correct"><span class="opt-label">د</span> حوضه آبریز</div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="qa-card" onclick="toggle(this)">
+      <div class="qa-q">
+        <div class="q-num">۳</div>
+        <div class="q-text">مدت زمان دو برابر شدن جمعیت یک کشود چند سال است؟</div>
+        <div class="q-arrow">›</div>
+      </div>
+      <div class="qa-a"><div class="qa-a-inner">
+        <div class="mc-options">
+          <div class="mc-opt wrong"><span class="opt-label">الف</span> رشد مطلق</div>
+          <div class="mc-opt wrong"><span class="opt-label">ب</span> رشد منفی</div>
+          <div class="mc-opt correct"><span class="opt-label">ج</span> ۷۰ (تقسیم بر نرخ رشد)</div>
+          <div class="mc-opt wrong"><span class="opt-label">د</span> اهرم سنی</div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="qa-card" onclick="toggle(this)">
+      <div class="qa-q">
+        <div class="q-num">۴</div>
+        <div class="q-text">کدام گزینه جزء جغرافیای طبیعی محسوب می‌شود؟</div>
+        <div class="q-arrow">›</div>
+      </div>
+      <div class="qa-a"><div class="qa-a-inner">
+        <div class="mc-options">
+          <div class="mc-opt wrong"><span class="opt-label">الف</span> فرهنگی</div>
+          <div class="mc-opt wrong"><span class="opt-label">ب</span> هندسه</div>
+          <div class="mc-opt wrong"><span class="opt-label">ج</span> جغرافیای شهری</div>
+          <div class="mc-opt correct"><span class="opt-label">د</span> جغرافیای زیستی</div>
+        </div>
+      </div></div>
+    </div>
+
+  </div>
+
+  <!-- SECTION 2: جاهای خالی -->
+  <div class="section-header">
+    <span class="section-badge">بخش ۲</span>
+    <span class="section-title">جاهای خالی را پر کنید</span>
+    <span class="section-count">۴ سوال</span>
+  </div>
+  <div class="qa-list">
+
+    <div class="qa-card" onclick="toggle(this)">
+      <div class="qa-q">
+        <div class="q-num">۵الف</div>
+        <div class="q-text">دید _______ مطالعه همه جانبه و جامع پدیده‌ها با تمام ویژگی‌های آن در یک مکان است.</div>
+        <div class="q-arrow">›</div>
+      </div>
+      <div class="qa-a"><div class="qa-a-inner">
+        <div class="fill-answer">ترکیبی یا کلی</div>
+      </div></div>
+    </div>
+
+    <div class="qa-card" onclick="toggle(this)">
+      <div class="qa-q">
+        <div class="q-num">۵ب</div>
+        <div class="q-text">مطالعه‌ای که فرد پژوهشگر با حضور در محل تحقیق انجام می‌دهد _______ می‌گویند.</div>
+        <div class="q-arrow">›</div>
+      </div>
+      <div class="qa-a"><div class="qa-a-inner">
+        <div class="fill-answer">دید میدانی</div>
+      </div></div>
+    </div>
+
+    <div class="qa-card" onclick="toggle(this)">
+      <div class="qa-q">
+        <div class="q-num">۵ج</div>
+        <div class="q-text">بسیاری از فعالیت‌های انسان در محل معینی انجام می‌شود که آن را _______ می‌نامند.</div>
+        <div class="q-arrow">›</div>
+      </div>
+      <div class="qa-a"><div class="qa-a-inner">
+        <div class="fill-answer">مکان</div>
+      </div></div>
+    </div>
+
+    <div class="qa-card" onclick="toggle(this)">
+      <div class="qa-q">
+        <div class="q-num">۵د</div>
+        <div class="q-text">سوال _______ به روند زمانی موضوعات می‌پردازد.</div>
+        <div class="q-arrow">›</div>
+      </div>
+      <div class="qa-a"><div class="qa-a-inner">
+        <div class="fill-answer">چه موقع</div>
+      </div></div>
+    </div>
+
+  </div>
+
+  <!-- SECTION 3: صحیح و غلط -->
+  <div class="section-header">
+    <span class="section-badge">بخش ۳</span>
+    <span class="section-title">صحیح یا غلط</span>
+    <span class="section-count">۴ جمله</span>
+  </div>
+  <div class="qa-list">
+
+    <div class="qa-card" onclick="toggle(this)">
+      <div class="qa-q">
+        <div class="q-num">۶</div>
+        <div class="q-text">جملات زیر را صحیح یا غلط مشخص کنید.</div>
+        <div class="q-arrow">›</div>
+      </div>
+      <div class="qa-a"><div class="qa-a-inner">
+        <div class="tf-row">
+          <div class="tf-item t">✓ الف — متخصصان برای دست‌یابی به میزان افزایش و کاهش رشد طبیعی جمعیت را اندازه می‌گیرند. <strong>صحیح</strong></div>
+        </div>
+        <div class="tf-row">
+          <div class="tf-item t">✓ ب — شهری که حول محورهای ارتباطی و یا در امتداد رود دریا و دریاچه به صورت خطی شکل گرفته است. <strong>صحیح</strong></div>
+        </div>
+        <div class="tf-row">
+          <div class="tf-item t">✓ ج — آریایی‌ها از شمال دریای خزر به علت سرما و از دست دادن چراگاه به جنوب دریای خزر مهاجرت کردند. <strong>صحیح</strong></div>
+        </div>
+        <div class="tf-row">
+          <div class="tf-item t">✓ د — نقش هر سکونتگاه براساس وضع جغرافیایی آن اعم از طبیعی و انسانی است. <strong>صحیح</strong></div>
+        </div>
+      </div></div>
+    </div>
+
+  </div>
+
+  <!-- SECTION 4: تعریف و توضیح -->
+  <div class="section-header">
+    <span class="section-badge">بخش ۴</span>
+    <span class="section-title">تعریف و توضیح</span>
+    <span class="section-count">۱۸ سوال</span>
+  </div>
+  <div class="qa-list">
+
+    <div class="qa-card" onclick="toggle(this)">
+      <div class="qa-q">
+        <div class="q-num">۷</div>
+        <div class="q-text">موقعیت مطلق جغرافیایی چیست؟</div>
+        <div class="q-arrow">›</div>
+      </div>
+      <div class="qa-a"><div class="qa-a-inner">
+        محل دقیق هر پدیده یا مکان با توجه به <strong>طول و عرض جغرافیایی</strong>، موقعیت مطلق ریاضی آن مکان است.
+      </div></div>
+    </div>
+
+    <div class="qa-card" onclick="toggle(this)">
+      <div class="qa-q">
+        <div class="q-num">۸</div>
+        <div class="q-text">محدوده کوهستانی مرکزی را بنویسید.</div>
+        <div class="q-arrow">›</div>
+      </div>
+      <div class="qa-a"><div class="qa-a-inner">
+        <ul class="list-answer">
+          <li>سه نقطه کوه جغتای در خراسان رضوی</li>
+          <li>گردنه اوج در استان قزوین</li>
+          <li>قله کوه بزمان در سیستان و بلوچستان</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <div class="qa-card" onclick="toggle(this)">
+      <div class="qa-q">
+        <div class="q-num">۹</div>
+        <div class="q-text">ارزش‌های اقتصادی مناطق کوهستانی را بنویسید.</div>
+        <div class="q-arrow">›</div>
+      </div>
+      <div class="qa-a"><div class="qa-a-inner">
+        <ul class="list-answer">
+          <li>ذخایر آب</li>
+          <li>معدن</li>
+          <li>ذخایر طبیعی</li>
+          <li>دامداری</li>
+          <li>گردشگری</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <div class="qa-card" onclick="toggle(this)">
+      <div class="qa-q">
+        <div class="q-num">۱۰</div>
+        <div class="q-text">گنبدهای نمکی ایران در کدام ناحیه قرار دارند؟</div>
+        <div class="q-arrow">›</div>
+      </div>
+      <div class="qa-a"><div class="qa-a-inner">
+        <div class="chip-answer">✓ رشته کوه زاگرس</div>
+      </div></div>
+    </div>
+
+    <div class="qa-card" onclick="toggle(this)">
+      <div class="qa-q">
+        <div class="q-num">۱۱</div>
+        <div class="q-text">کویر را تعریف کنید.</div>
+        <div class="q-arrow">›</div>
+      </div>
+      <div class="qa-a"><div class="qa-a-inner">
+        بخشی از بیابان است و به نمکزارها پف کرده گفته می‌شود که <strong>تبخیر شدید</strong> عامل اصلی شکل‌گیری آن است.
+      </div></div>
+    </div>
+
+    <div class="qa-card" onclick="toggle(this)">
+      <div class="qa-q">
+        <div class="q-num">۱۲</div>
+        <div class="q-text">چه عواملی در ایجاد بیابان‌های ایران نقش دارند؟</div>
+        <div class="q-arrow">›</div>
+      </div>
+      <div class="qa-a"><div class="qa-a-inner">
+        <ul class="list-answer">
+          <li>پرفشار جنب حاره‌ای</li>
+          <li>جهت رشته کوه‌های البرز و زاگرس</li>
+          <li>دور بودن از دریاها و منابع رطوبتی</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <div class="qa-card" onclick="toggle(this)">
+      <div class="qa-q">
+        <div class="q-num">۱۳</div>
+        <div class="q-text">رودهایی که به دریای خزر می‌ریزند را نام ببرید.</div>
+        <div class="q-arrow">›</div>
+      </div>
+      <div class="qa-a"><div class="qa-a-inner">
+        <ul class="list-answer">
+          <li>رود ولگا و اورال از شمال</li>
+          <li>سفیدرود و هراز از جنوب</li>
+          <li>رود اترک و گرگان از جنوب شرق</li>
+          <li>رود کورا و ارس از سمت جنوب غربی</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <div class="qa-card" onclick="toggle(this)">
+      <div class="qa-q">
+        <div class="q-num">۱۴</div>
+        <div class="q-text">خور چیست؟</div>
+        <div class="q-arrow">›</div>
+      </div>
+      <div class="qa-a"><div class="qa-a-inner">
+        به <strong>خلیج‌های کوچک سواحل خلیج فارس</strong> می‌گویند.
+      </div></div>
+    </div>
+
+    <div class="qa-card" onclick="toggle(this)">
+      <div class="qa-q">
+        <div class="q-num">۱۵</div>
+        <div class="q-text">دو مورد از دلایل کاهش آب دریاچه ارومیه را بنویسید.</div>
+        <div class="q-arrow">›</div>
+      </div>
+      <div class="qa-a"><div class="qa-a-inner">
+        <ul class="list-answer">
+          <li>تغییر اقلیم و پدیده خشکسالی</li>
+          <li>احداث سد بر روی رودخانه‌های حوضه آبریز دریاچه</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <div class="qa-card" onclick="toggle(this)">
+      <div class="qa-q">
+        <div class="q-num">۱۶</div>
+        <div class="q-text">تنها بندر اقیانوسی ایران کجاست؟</div>
+        <div class="q-arrow">›</div>
+      </div>
+      <div class="qa-a"><div class="qa-a-inner">
+        <div class="chip-answer">✓ بندر چابهار</div>
+      </div></div>
+    </div>
+
+    <div class="qa-card" onclick="toggle(this)">
+      <div class="qa-q">
+        <div class="q-num">۱۷</div>
+        <div class="q-text">اهمیت هرم سنی را بنویسید.</div>
+        <div class="q-arrow">›</div>
+      </div>
+      <div class="qa-a"><div class="qa-a-inner">
+        به برنامه‌ریزان کمک می‌کند که با ساختمان سنی جمعیت آن کشور آشنا شوند و از آن برای برنامه‌ریزی استفاده کنند؛ از جمله برای <strong>تامین اجتماعی</strong>، بهبود وضعیت سالمندان، ارتقای سلامت جامعه و جلوگیری از پیری جمعیتی.
+      </div></div>
+    </div>
+
+    <div class="qa-card" onclick="toggle(this)">
+      <div class="qa-q">
+        <div class="q-num">۱۸</div>
+        <div class="q-text">مهاجرت چیست؟</div>
+        <div class="q-arrow">›</div>
+      </div>
+      <div class="qa-a"><div class="qa-a-inner">
+        جابجایی بین دو واحد جغرافیایی یا به عبارتی <strong>ترک یک سرزمین و اسکان در سرزمین دیگر</strong>.
+      </div></div>
+    </div>
+
+    <div class="qa-card" onclick="toggle(this)">
+      <div class="qa-q">
+        <div class="q-num">۱۹</div>
+        <div class="q-text">در دوره هخامنشیان تقسیم‌بندی کشوری چگونه بود؟</div>
+        <div class="q-arrow">›</div>
+      </div>
+      <div class="qa-a"><div class="qa-a-inner">
+        داریوش کشور را به سی <strong>شهربی</strong> تقسیم کرد که همان شهر می‌باشد. برای هر یک ماموری می‌گماشت که آنها را شهربان و به یونانی <strong>ساتراپ</strong> می‌گفتند.
+      </div></div>
+    </div>
+
+    <div class="qa-card" onclick="toggle(this)">
+      <div class="qa-q">
+        <div class="q-num">۲۰</div>
+        <div class="q-text">شهر بندری و زیارتگاهی را تعریف کنید.</div>
+        <div class="q-arrow">›</div>
+      </div>
+      <div class="qa-a"><div class="qa-a-inner">
+        <strong>شهر بندری:</strong> شهرهایی که به دلیل قرارگیری در کنار دریا قابلیت پهلوگیری و تخلیه بار دارند.<br><br>
+        <strong>شهر زیارتگاهی:</strong> شهرهایی مثل قم و مشهد که به دلیل وجود زیارتگاه شکل گرفته‌اند.
+      </div></div>
+    </div>
+
+    <div class="qa-card" onclick="toggle(this)">
+      <div class="qa-q">
+        <div class="q-num">۲۱</div>
+        <div class="q-text">اجزای زندگی روستایی را بنویسید.</div>
+        <div class="q-arrow">›</div>
+      </div>
+      <div class="qa-a"><div class="qa-a-inner">
+        <ul class="list-answer">
+          <li>میدان</li>
+          <li>مسجد</li>
+          <li>خانه</li>
+          <li>مزارع</li>
+          <li>چراگاه‌ها</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <div class="qa-card" onclick="toggle(this)">
+      <div class="qa-q">
+        <div class="q-num">۲۲</div>
+        <div class="q-text">مهم‌ترین محصولات تولیدی کشور را نام ببرید.</div>
+        <div class="q-arrow">›</div>
+      </div>
+      <div class="qa-a"><div class="qa-a-inner">
+        <ul class="list-answer">
+          <li>خرما</li>
+          <li>انار</li>
+          <li>پسته</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <div class="qa-card" onclick="toggle(this)">
+      <div class="qa-q">
+        <div class="q-num">۲۳</div>
+        <div class="q-text">مزایای کشت گلخانه‌ای را بنویسید.</div>
+        <div class="q-arrow">›</div>
+      </div>
+      <div class="qa-a"><div class="qa-a-inner">
+        <ul class="list-answer">
+          <li>کاهش مصرف آب</li>
+          <li>تولید در طول سال و همه جا</li>
+          <li>کنترل بهتر وضعیت کشت</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <div class="qa-card" onclick="toggle(this)">
+      <div class="qa-q">
+        <div class="q-num">۲۴</div>
+        <div class="q-text">نقش عشایر در اقتصاد کشور را بنویسید.</div>
+        <div class="q-arrow">›</div>
+      </div>
+      <div class="qa-a"><div class="qa-a-inner">
+        تولیدکننده محصولات دامی. جمعیت عشایری کشور <strong>۲٪</strong> از جمعیت کشور است. آنان <strong>۲۵٪</strong> واحد دامی و <strong>۲۰٪</strong> از تولید پروتئین مربوط به دام کشور را به خود اختصاص داده‌اند.
+      </div></div>
+    </div>
+
+  </div>
+
+</main>
+
+<footer>
+  جغرافیا پایه دهم — فنی حرفه‌ای | رشته شبکه و نرم‌افزار
+</footer>
+
+<script>
+  let openCount = 0;
+  const total = document.querySelectorAll('.qa-card').length;
+
+  function toggle(el) {
+    const wasOpen = el.classList.contains('open');
+    el.classList.toggle('open');
+    if (!wasOpen) openCount++;
+    else openCount = Math.max(0, openCount - 1);
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const pct = Math.round((openCount / total) * 100);
+    document.getElementById('opened').textContent = toPersian(openCount);
+    document.getElementById('progress').style.width = pct + '%';
+    document.getElementById('pct-text').textContent = toPersian(pct) + '٪';
+  }
+
+  function toPersian(n) {
+    return String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+  }
+
+  document.getElementById('total').textContent = toPersian(total);
+
+  function filterQA() {
+    const q = document.getElementById('searchInput').value.trim().toLowerCase();
+    document.querySelectorAll('.qa-card').forEach(card => {
+      const text = card.querySelector('.q-text').textContent.toLowerCase();
+      const aText = card.querySelector('.qa-a').textContent.toLowerCase();
+      card.classList.toggle('hidden', q && !text.includes(q) && !aText.includes(q));
+    });
+  }
+</script>
+</body>
+</html>
